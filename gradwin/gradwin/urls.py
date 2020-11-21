@@ -15,8 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+# from manager import views
+# from authentication import views
+
 
 urlpatterns = [
-    path('', include("gradwin_manager.urls")),
+    path('', include("authentication.urls")),
     path('admin/', admin.site.urls),
+    path('manager/', include("manager.urls")),
+    path('inventory/', include("inventory.urls")),
+    path('sales/', include("sales.urls")),
+
+
+    # path('logout', views.logout, name="logout"),
+
 ]
+
+urlpatterns = urlpatterns + \
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

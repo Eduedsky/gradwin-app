@@ -22,12 +22,14 @@
     <link href="{% static '/css/dashboard.css' %} " rel="stylesheet" />
   </head>
   <body>
-    <nav
-      class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
-    >
-      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"
-        >Gradwin Bookshop</a
-      >
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    {% if user.is_authenticated %}
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-center" href="#">Hello, {{user.username}}</a>
+
+    {% else %}
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-center" href="#">Hello</a>
+
+    {% endif %}
       <button
         class="navbar-toggler position-absolute d-md-none collapsed"
         type="button"
@@ -47,7 +49,9 @@
       />
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+        {% if user.is_authenticated %}
+          <a class="nav-link" href="logout">Sign out</a>
+        {% endif %}
         </li>
       </ul>
     </nav>
@@ -70,12 +74,6 @@
        src=" {% static 'js/jquery-3.5.1.slim.min.js' %}"
 
     ></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>'
-        );
-    </script>
     <script
       src=" {% static 'js/bootstrap.bundle.min.js' %}"
     ></script>

@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gradwin_manager',
+    'manager',
+    'inventory',
+    'sales',
+    'authentication',
+    'djmoney',
+
 ]
 
 MIDDLEWARE = [
@@ -120,9 +125,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "gradwin/static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+# Custom Django auth settings
+
+# AUTH_USER_MODEL = 'accounts.User'
+
+# LOGIN_URL = 'login'
+
+# LOGOUT_URL = 'logout'
+
+# LOGIN_REDIRECT_URL = 'home'
+
+# LOGOUT_REDIRECT_URL = 'home'

@@ -1,0 +1,54 @@
+{% extends 'authentication/sign_in.html' %} {% block content %}
+<title>Sales</title>
+
+<form class="form-signin" method="post">
+  {% csrf_token %}
+
+  <img class="mb-4" src="media/login.png" alt="" width="72" height="72" />
+  <h1 class="h3 mb-3 font-weight-normal">Sales Dashboard</h1>
+  <label for="inputusername" class="sr-only">Username</label>
+  <input
+    type="text"
+    id="inputusername"
+    name="username"
+    class="form-control"
+    placeholder="Username"
+    required
+    autofocus
+  />
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input
+    type="password"
+    name="password"
+    id="inputPassword"
+    class="form-control"
+    placeholder="Password"
+    required
+  />
+  <div class="checkbox mb-3">
+    <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Sign in
+  </button>
+  <p class="mt-5 mb-3 text-muted">&copy; Gradwin Bookshop</p>
+  <a href="sign-in" class="btn btn-primary">Back</a>
+</form>
+
+<div>
+  {% for message in messages%}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+      <script>
+        $(".alert").alert();
+
+        $().alert("dispose");
+      </script>
+    </button>
+  </div>
+
+  {% endfor %}
+</div>
+{% endblock content %}

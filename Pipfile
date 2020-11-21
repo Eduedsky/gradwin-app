@@ -6,13 +6,6 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-heroku = "*"
-django-heroku = "*"
-gunicorn = "*"
-psycopg2 = "*"
-pillow = "*"
-django-moneyfield = "*"
-django-money = "*"
 
 [requires]
 python_version = "3.8"
