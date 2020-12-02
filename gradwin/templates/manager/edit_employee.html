@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block content %} 
+
+{% load static %}
+<nav
+  id="sidebarMenu"
+  class="col-md-3 col-lg-2 d-md-block bg-light pl-2 sidebar collapse"
+>
+<div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="">
+          <span data-feather="edit"></span>
+          Edit Employee Records
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="{% url 'view_employee' %} " class="btn btn-info">Back</a>
+    </div>
+  </div>
+</nav>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">{{values.first_name}} {{values.last_name}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{values.id}}</li>
+    </ol>
+  </nav>
+  {% if user.is_active %}
+    <a href="{% url 'deactivate_user'  user.id %}" class="btn btn-outline-danger" role="button" >Deactivate User</a>
+  {% else %}
+  <a href="{% url 'activate_user'  user.id %}" class="btn btn-outline-danger" role="button" >Activate User</a>  
+  {% endif %}
+
+</div>
+<form class="form-signin" action="{% url 'edit_employee' user.id %}" method="post">
+    {% csrf_token %}
+          {% include 'partials/_alert.html' %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputusername" class="sr-only">Username</label>
+                <input
+                  type="text"
+                  id="inputusername"
+                  name="username"
+                  class="form-control"
+                  placeholder="Username"
+                  required
+                  autofocus
+                  value="{{values.username}} "
+                />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input
+                  type="email"
+                  id="inputEmail"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email address"
+                  required
+                  autofocus
+                  value="{{values.email}} "
+
+                />
+            </div>
+          </div>
+        
+          <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Update Employee Records
+          </button>
+          <p class="mt-5 mb-3 text-muted">&copy; Gradwin Bookshop</p>
+        </form>
+{% endblock content %}

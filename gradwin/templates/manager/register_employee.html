@@ -1,94 +1,90 @@
-{% extends 'authentication/sign_in.html' %} {% block content %}
-<title>Sales</title>
+{% extends "base.html" %} {% block content %} 
 
+<h1 class="h2">New Employee Details</h1>
+</div>
 <form class="form-signin" action="register_employee" method="post">
-  {% csrf_token %}
+{% csrf_token %}
+  {% include 'partials/_alert.html' %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputfirstname" class="sr-only">First name</label>
+      <input
+        type="text"
+        id="inputfirstname"
+        class="form-control"
+        placeholder="First name"
+        name="first_name"
+        value="{{values.first_name}}"
+        required
+        autofocus
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputlastname" class="sr-only">Last Name</label>
+      <input
+        type="text"
+        id="inputlastname"
+        name="last_name"
+        class="form-control"
+        placeholder="Second Name"
+        required
+        value="{{values.last_name}}"
 
-  <img class="mb-4" src="media/login.png" alt="" width="72" height="72" />
-  <h1 class="h3 mb-3 font-weight-normal">New employee</h1>
-
-  <label for="inputfirstname" class="sr-only">First name</label>
-  <input
-    type="text"
-    id="inputfirstname"
-    class="form-control"
-    placeholder="First name"
-    name="first_name"
-    required
-    autofocus
-  />
-  <label for="inputlastname" class="sr-only">Last Name</label>
-  <input
-    type="text"
-    id="inputlastname"
-    name="last_name"
-    class="form-control"
-    placeholder="Second Name"
-    required
-  />
-  <label for="inputusername" class="sr-only">Username</label>
-  <input
-    type="text"
-    id="inputusername"
-    name="username"
-    class="form-control"
-    placeholder="Username"
-    required
-    autofocus
-  />
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input
-    type="email"
-    id="inputEmail"
-    name="email"
-    class="form-control"
-    placeholder="Email address"
-    required
-    autofocus
-  />
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input
-    type="password"
-    name="password1"
-    id="inputPassword"
-    class="form-control"
-    placeholder="Password"
-    required
-  />
-  <label for="inputPassword" class="sr-only">Confirm Password</label>
-  <input
-    type="password"
-    name="password2"
-    id="inputPassword"
-    class="form-control"
-    placeholder="Confirm Password"
-    required
-  />
-
-  <div class="checkbox mb-3">
-    <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+      />
+    </div>
   </div>
+  <div class="form-group">
+    <label for="inputusername" class="sr-only">Username</label>
+    <input
+      type="text"
+      id="inputusername"
+      name="username"
+      class="form-control"
+      placeholder="Username"
+      required
+      autofocus
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input
+      type="email"
+      id="inputEmail"
+      name="email"
+      class="form-control"
+      placeholder="Email address"
+      required
+      autofocus
+    />
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input
+        type="password"
+        name="password1"
+        id="inputPassword"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword" class="sr-only">Confirm Password</label>
+      <input
+        type="password"
+        name="password2"
+        id="inputPassword"
+        class="form-control"
+        placeholder="Confirm Password"
+        required
+      />
+    </div>
+  </div>
+
   <button class="btn btn-lg btn-primary btn-block" type="submit">
     Create Employee
   </button>
   <p class="mt-5 mb-3 text-muted">&copy; Gradwin Bookshop</p>
-  <a href="sign-in" class="btn btn-primary">Back</a>
 </form>
-
-<div>
-  {% for message in messages%}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-      <script>
-        $(".alert").alert();
-
-        $().alert("dispose");
-      </script>
-    </button>
-  </div>
-
-  {% endfor %}
-</div>
 {% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% include 'partials/_alert.html' %}
+<h1 class="h2">Dashboard</h1>
+<div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group mr-2">
+    <button type="button" class="btn btn-sm btn-outline-secondary">
+      Share
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary">
+      Export
+    </button>
+  </div>
+  <button
+    type="button"
+    class="btn btn-sm btn-outline-secondary dropdown-toggle"
+  >
+    <span data-feather="calendar"></span>
+    This week
+  </button>
+</div>
+</div>
+
+
+
+<h2>Employee Details</h2>
+<div class="table-responsive">
+<table class="table table-bordered table-sm table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Emp_ID</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Last Login</th>
+      <th>Account</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+
+      {% for user in users %}
+
+      {% if user.username == 'admin' %}
+
+      {% else %}
+    <tr class="table-info">
+      <td>{{user.id}}</td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>    
+      <td>{{user.last_login}}</td>
+      <th>{% if user.is_active %}Active {% else %} Deactivated {% endif %}</th>
+      
+
+      <td class="table-danger"><a class="btn btn-sm btn-danger" href="{% url 'edit_employee' user.id %}" role="button"><span data-feather="edit"></span></a></td>
+
+
+    </tr>
+      {% endif %}
+
+
+
+      {% endfor %}
+
+  </tbody>
+
+</table>
+</div>
+{% endblock content %}

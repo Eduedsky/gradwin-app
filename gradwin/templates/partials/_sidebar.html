@@ -3,6 +3,120 @@
   id="sidebarMenu"
   class="col-md-3 col-lg-2 d-md-block bg-light pl-2 sidebar collapse"
 >
+  {% if request.get_full_path == "/sales/order" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <span data-feather="home"></span>
+          Make Sale <span class="shopping-cart">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="sales_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- sales dashboard -->
+
+  {% if request.get_full_path == "/sales/sales_dashboard" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      {% comment %}
+      <li class="nav-item">
+        <a class="nav-link" href="order">
+          <span data-feather="shopping-cart"></span>
+          Make Sale
+        </a>
+      </li>
+      {% endcomment %}
+      <li class="nav-item">
+        <a class="nav-link" href="search_product">
+          <span data-feather="search"></span>
+          Search & Sell
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- search product inventory -->
+
+  {% if request.get_full_path == "/inventory/search_product" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="view_inventory" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- search product sales -->
+
+  {% if request.get_full_path == "/sales/search_product" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="sales_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- manager dashboard -->
+
   {% if request.get_full_path == "/manager/manager_dashboard" %}
 
   <div class="sidebar-sticky pt-3">
@@ -18,7 +132,7 @@
     <h6
       class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
     >
-      <span>Employee Management</span>
+      <span>Employee</span>
       <a
         class="d-flex align-items-center text-muted"
         href="#"
@@ -29,22 +143,16 @@
     </h6>
 
     <ul class="nav flex-column mb-2">
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="shopping-cart"></span>
-          Products
-        </a>
-      </li> -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="users"></span>
+        <a class="nav-link" href="register_employee">
+          <span data-feather="user-plus"></span>
           Add new Employee
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="view_employee">
           <span data-feather="users"></span>
-          Delete Employee
+          View Employees
         </a>
       </li>
     </ul>
@@ -69,21 +177,141 @@
           Sales Volume
         </a>
       </li>
+    </ul>
+  </div>
+  {% endif %}
+  <!-- register employee -->
+
+  {% if request.get_full_path == "/manager/register_employee" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <span data-feather="users"></span>
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+    >
+      <span>Employee</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+      >
+        {% comment %} <span data-feather="plus-circle"></span> {% endcomment %}
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link active" href="register_employee">
+          <span data-feather="user-plus"></span>
           Add new Employee
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="view_employee">
           <span data-feather="users"></span>
-          Delete Employee
+          View Employees
+        </a>
+      </li>
+    </ul>
+
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+    >
+      <span>Sales Management</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+      >
+        {% comment %} <span data-feather="plus-circle"></span> {% endcomment %}
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="shopping-cart"></span>
+          Sales Volume
         </a>
       </li>
     </ul>
     <div class="pl-5" style="align-items: bottom">
-      <a href="/" class="btn btn-primary">Back</a>
+      <a href="manager_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- view  employee-->
+
+  {% if request.get_full_path == "/manager/view_employee" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+    >
+      <span>Employee</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+      >
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="register_employee">
+          <span data-feather="user-plus"></span>
+          Add new Employee
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="view_employee">
+          <span data-feather="users"></span>
+          View Employees
+        </a>
+      </li>
+    </ul>
+
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+    >
+      <span>Sales Management</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+      >
+        {% comment %} <span data-feather="plus-circle"></span> {% endcomment %}
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="shopping-cart"></span>
+          Sales Volume
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="manager_dashboard" class="btn btn-info">Back</a>
     </div>
   </div>
   {% endif %}
@@ -101,60 +329,329 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file"></span>
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
           Add New Inventory
         </a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="shopping-cart"></span>
-          Products
-        </a>
-      </li> -->
+
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="bar-chart-2"></span>
+        <a class="nav-link" href="view_inventory">
+          <span data-feather="file"></span>
           View Inventory
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Current month
+        <a class="nav-link" href="add_category">
+          <span data-feather="archive"></span>
+          Add Category
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Last quarter
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file"></span>
-          Sales Management
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="bar-chart-2"></span>
-          Inventory Management
-        </a>
-      </li>
+
       {% comment %}
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="bar-chart-2"></span>
-          Inventory Management
+        <a class="nav-link" href="view_inventory">
+          <span data-feather="edit"></span>
+          Edit Inventory
         </a>
       </li>
       {% endcomment %}
     </ul>
+  </div>
+  {% endif %}
+
+  <!-- inventory management -->
+
+  {% if request.get_full_path == "/inventory/add_inventory" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
 
     <div class="pl-5" style="align-items: bottom">
-      <a href="/" class="btn btn-primary">Back</a>
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- sales_view_by_author -->
+
+  {% if request.get_full_path == "/sales/sales_view_by_author"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="search_product" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- sales view by lowest price -->
+  {% if request.get_full_path == "/sales/sales_view_by_lowest_price"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="search_product" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- sales view by highest price -->
+  {% if request.get_full_path == "/sales/sales_view_by_highest_price"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="search_product" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- sales view by date entry -->
+  {% if request.get_full_path == "/sales/sales_view_by_date_entry"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="search_product" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- sales view by name  -->
+  {% if request.get_full_path == "/sales/sales_view_by_name"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="sales_dashboard">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="search_product">
+          <span data-feather="search"></span>
+          Search Products
+        </a>
+      </li>
+    </ul>
+    <div class="pl-5" style="align-items: bottom">
+      <a href="search_product" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- view_by_author -->
+
+  {% if request.get_full_path == "/inventory/view_by_author"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- view by lowest price -->
+  {% if request.get_full_path == "/inventory/view_by_lowest_price"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- view by highest price -->
+  {% if request.get_full_path == "/inventory/view_by_highest_price"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- view by date entry -->
+  {% if request.get_full_path == "/inventory/view_by_date_entry"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+  <!-- view by name  -->
+  {% if request.get_full_path == "/inventory/view_by_name"%}
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- edit_product  -->
+
+  <!-- view -->
+  {% if request.get_full_path == "/inventory/view_inventory" %}
+
+  <div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="add_inventory">
+          <span data-feather="shopping-bag"></span>
+          Add New Inventory
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="view_inventory">
+          <span data-feather="file"></span>
+          View Inventory
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="inventory_dashboard" class="btn btn-info">Back</a>
     </div>
   </div>
   {% endif %}

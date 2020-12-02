@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<nav
+  id="sidebarMenu"
+  class="col-md-3 col-lg-2 d-md-block bg-light pl-2 sidebar collapse"
+>
+<div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active">
+          <span data-feather="delete"></span>
+          Delete Category
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="{% url 'add_inventory' %} " class="btn btn-info">Back</a>
+    </div>
+  </div>
+</nav>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Delete Category</a></li>
+      <!-- <li class="breadcrumb-item"><a href="#">{{values.category}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{values.buying_price}}KSH</li> -->
+    </ol>
+  </nav>
+</div>
+  <!-- {% include 'partials/_alert.html' %} -->
+ 
+<h1 class="h2">Search for Category</h1>
+<div class="btn-toolbar mb-2 mb-md-0">
+  
+</div>
+
+<form class="form-signin" action="delete_category" method="post">
+    {% csrf_token %}
+      {% include 'partials/_alert.html' %}
+    <div class="form-group">
+      <input
+      class="form-control form-control"
+      aria-label="Search"
+      type="text"
+      id="search_field"
+      class="form-control"
+      placeholder="Search Product"
+      name="search_field"
+      value="{{values.search_field}}"
+      autofocus
+    />     
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+<h2>Product Details</h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Category </th>
+      <th>Delete</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+          {% for category in category %}
+    
+      <tr class="table-info">
+        <td>{{category.name}}</td>
+        <td class="table-danger"><a class="btn btn-danger" href="{% url 'delete_category' %}" role="button"><span data-feather="delete"></span></a></td>
+
+      </tr>
+
+        {% endfor %}
+
+
+
+</ul>
+  </tbody>
+
+</table>
+</div>
+{% endblock content %}

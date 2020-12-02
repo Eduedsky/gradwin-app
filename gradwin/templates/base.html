@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="Edwin Karanja" />
     <title>
-      Gradwin Admin Dashboard {% block title %} {% endblock title %}
+      {{page.title}}
     </title>
 
     
@@ -41,17 +41,35 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <input
-        class="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
+
+
+        {% if request.get_full_path == "/inventory/inventory_dashboard"%}
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href=""> Welcome to Gradwin Inventory Dashboard</a>
+        </li>
+      </ul>  
+        {% endif %}
+
+        {% if request.get_full_path == "/inventory/add_inventory"%}
+
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href=""> Add new Inventory</a>
+          </li>
+        </ul>  
+        {% endif %}
+
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
         {% if user.is_authenticated %}
+            {% if request.get_full_path == "/manager/edit_employee/{{request.User.id}}" %}
+          {% else %}        
           <a class="nav-link" href="logout">Sign out</a>
+          {% endif %}
         {% endif %}
+
         </li>
       </ul>
     </nav>

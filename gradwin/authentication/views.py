@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 # Create your views here.
 
@@ -26,11 +28,16 @@ def manager_sign_in(request):
 
         user = auth.authenticate(username='admin', password=password)
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect('manager/manager_dashboard')
+        if User.objects.filter(username=username).exists():
+            if user is not None:
+                auth.login(request, user)
+                return redirect('manager/manager_dashboard')
+            else:
+                messages.info(request, 'invalid credentials')
+                return redirect('manager_signin')
         else:
-            messages.info(request, 'invalid credentials')
+            messages.info(
+                request, 'User does not exist. Lias with the Manager')
             return redirect('manager_signin')
 
     else:
@@ -44,11 +51,16 @@ def inventory_sign_in(request):
 
         user = auth.authenticate(username=username, password=password)
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect('inventory/inventory_dashboard')
+        if User.objects.filter(username=username).exists():
+            if user is not None:
+                auth.login(request, user)
+                return redirect('inventory/inventory_dashboard')
+            else:
+                messages.info(request, 'invalid credentials')
+                return redirect('inventory_signin')
         else:
-            messages.info(request, 'invalid credentials')
+            messages.info(
+                request, 'User does not exist. Lias with the Manager')
             return redirect('inventory_signin')
 
     else:
@@ -62,11 +74,16 @@ def sales_sign_in(request):
 
         user = auth.authenticate(username=username, password=password)
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect('sales/sales_dashboard')
+        if User.objects.filter(username=username).exists():
+            if user is not None:
+                auth.login(request, user)
+                return redirect('sales/sales_dashboard')
+            else:
+                messages.info(request, 'invalid credentials')
+                return redirect('sales_signin')
         else:
-            messages.info(request, 'invalid credentials')
+            messages.info(
+                request, 'User does not exist. Lias with the Manager')
             return redirect('sales_signin')
 
     else:

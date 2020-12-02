@@ -1,1 +1,77 @@
-{% extends "base.html" %}
+{% extends 'base.html' %} 
+
+
+{% block content %} 
+
+  {% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<h1 class="h2">Previous orders</h1>
+<div class="btn-toolbar mb-2 mb-md-0">
+  
+  <!-- <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-primary {% if request.get_full_path == "/inventory/view_by_date_entry"%} active {% endif %}"  
+ href="{% url 'view_by_date_entry' %}" role="button">Filter by Date</a>
+  </div>
+
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-danger {% if request.get_full_path == "/inventory/view_by_name"%} active {% endif %}" href="{% url 'view_by_name' %}" role="button">Filter by Name</a>
+  </div>
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-info {% if request.get_full_path == "/inventory/view_by_lowest_price"%} active {% endif %}" href="{% url 'view_by_lowest_price' %}" role="button">Filter by Lowest Price</a>
+  </div>
+    <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-success {% if request.get_full_path == "/inventory/view_by_highest_price"%} active {% endif %}" href="{% url 'view_by_highest_price' %}" role="button">Filter by Highest Price</a>
+  </div>
+-->
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'export_orders_csv' %}" role="button">Export Data</a>
+  </div> 
+
+</div>
+</div>
+
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Serial No</th>
+      <th>Name</th>
+      <th>Date Sold</th>
+      <th>Price</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+          {% for order in order %}
+    
+      <tr class="table-info">
+        <td>{{order.serialno}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.date_entry}}</td>
+        <td>{{order.price|floatformat:2}}ksh</td>      
+ 
+        </tr>
+
+        {% endfor %}
+
+
+
+</ul>
+  </tbody>
+
+</table>
+</div>
+
+ {% endblock content %}
+
+
+ 

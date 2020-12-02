@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- {% include 'partials/_alert.html' %} -->
+ 
+<h1 class="h2">Search for product</h1>
+<div class="btn-toolbar mb-2 mb-md-0">
+  
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-primary {% if request.get_full_path == "/inventory/sales_view_by_date_entry"%} active {% endif %}"  
+ href="{% url 'sales_view_by_date_entry' %}" role="button">Filter by Date</a>
+  </div>
+
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-danger {% if request.get_full_path == "/inventory/sales_view_by_name"%} active {% endif %}" href="{% url 'sales_view_by_name' %}" role="button">Filter by Name</a>
+  </div>
+  <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-info {% if request.get_full_path == "/inventory/sales_view_by_lowest_price"%} active {% endif %}" href="{% url 'sales_view_by_lowest_price' %}" role="button">Filter by Lowest Price</a>
+  </div>
+    <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-success {% if request.get_full_path == "/inventory/sales_view_by_highest_price"%} active {% endif %}" href="{% url 'sales_view_by_highest_price' %}" role="button">Filter by Highest Price</a>
+  </div>
+    <div class="btn-group mr-2">
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'export_orders_csv' %}" role="button">Export Data</a>
+  </div>
+</div>
+</div>
+
+<form class="form-signin" action="search_product" method="post">
+    {% csrf_token %}
+      {% include 'partials/_alert.html' %}
+    <div class="form-group">
+      <input
+      class="form-control form-control"
+      aria-label="Search"
+      type="text"
+      id="search_field"
+      class="form-control"
+      placeholder="Search Product"
+      name="search_field"
+      value="{{values.search_field}}"
+      autofocus
+    />     
+    </div>
+    <button type="submit" class="btn btn-primary">Search Product</button>
+  </form>
+
+<h2>Inventory Details</h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Serial No</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Date Entry</th>
+      <th>Price</th>
+      <th>Sell</th>
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+          {% for product in product %}
+    
+      <tr>
+        <td class="table-info">{{product.serialno}}</td>
+        <td {% if request.get_full_path == "/sales/sales_view_by_name"%} class="table-danger" {% else %} class="table-info"{% endif %} >{{product.name}}</td> 
+        <td {% if request.get_full_path == "/sales/sales_view_by_author"%} class="table-success" {% else %} class="table-info"{% endif %} >{{product.author}}</td> 
+        <td {% if request.get_full_path == "/sales/sales_view_by_date_entry"%} class="table-primary" {% else %} class="table-info"{% endif %} >{{product.date_entry}}</td> 
+        <td {% if request.get_full_path == "/sales/sales_view_by_highest_price"%} class="table-success" {% elif request.get_full_path == "/sales/sales_view_by_lowest_price"%} class="table-active" {% else %} class="table-info"{% endif %} >{{product.price|floatformat:2}}ksh</td> 
+        <td class="table-danger"><a class="btn btn-danger" href="{% url 'order' product.serialno %}" role="button"><span data-feather="shopping-cart"></span></a></td>
+
+      </tr>
+
+        {% endfor %}
+
+
+
+</ul>
+  </tbody>
+
+</table>
+</div>
+{% endblock content %}

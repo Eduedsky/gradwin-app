@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'sales',
     'authentication',
     'djmoney',
+    'phone_field'
+
 
 ]
 
@@ -146,3 +149,7 @@ django_heroku.settings(locals())
 # LOGIN_REDIRECT_URL = 'home'
 
 # LOGOUT_REDIRECT_URL = 'home'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

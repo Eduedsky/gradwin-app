@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block content %}
+
+<nav
+  id="sidebarMenu"
+  class="col-md-3 col-lg-2 d-md-block bg-light pl-2 sidebar collapse"
+>
+<div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="">
+          <span data-feather="edit"></span>
+          Edit Employee Records
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="{% url 'search_product' %} " class="btn btn-info">Back</a>
+    </div>
+  </div>
+</nav>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">{{values.name}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">SERIAL NO: {{values.serialno}}</li>
+    </ol>
+  </nav>
+
+<h1 class="h2">{{values.price}}KSH</h1>
+</div>
+<form class="form-signin" action="{% url 'order' product.serialno %}" method="post">
+ {% csrf_token %}
+  {% include 'partials/_alert.html' %}
+  <div class="form-row">
+ {% comment %} <div class="form-group col-md-6">
+      <label for="serialno" class="sr-only">Serial no</label>
+      <input
+ type="number"
+        id="serialno" 
+        class="form-control"
+        placeholder="Serial no"
+        name="serialno"
+        min="1" 
+        required
+        autofocus
+        value="{{values.serialno}} "
+        readonly
+      />
+    </div> 
+    <div class="form-group col-md-6">
+      <label for="name" class="sr-only">Inventory name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        class="form-control"
+        placeholder="Inventory Name"
+        required
+        value="{{values.name}} "
+        readonly
+      />
+    </div>
+  </div>
+<div class="form-group">
+    <label for="price" class="sr-only">Price</label>
+    <input
+      type="number"
+      id="price"
+      name="price"
+      class="form-control"
+      placeholder="Price"
+      min="1" 
+      max="4000"
+      step="any"
+      required
+      autofocus
+      value="{{values.price}} "
+
+
+    />
+  </div>  {% endcomment %}
+  <button type="submit" class="btn btn-primary">Sell Now</button>
+</form>
+{% endblock content %}
+
+
+

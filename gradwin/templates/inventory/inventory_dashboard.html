@@ -1,1 +1,101 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+
+
+{% block content %} 
+
+  {% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card text-white bg-danger mb-3 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total Inventory</h5>
+          <h2 class="card-text">{{quantity}}</h2>
+          <!-- <a href="#" class="btn btn-secondary">View Categories</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card text-white bg-success mb-3 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total Categories</h5>
+          <h2 class="card-text">{{categories.count}}</h2>
+          <!-- <a href="#" class="btn btn-secondary">View Categories</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card text-white bg-info mb-3 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total Inventory Price</h5>
+          <h2 class="card-text">{{total_price|floatformat:2}} KSH</h2>
+          <!-- <a href="#" class="btn btn-secondary">View Categories</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card text-white bg-primary mb-3 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Total V.A.T</h5>
+          <h2 class="card-text">{{vat|floatformat:2}} KSH</h2>
+          <!-- <a href="#" class="btn btn-secondary">View Categories</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-sm table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Item_No</th>
+        <!-- <th>Category</th> -->
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Buying Price</th>
+        <th>Total Price</th>
+        <th>V.A.T (16%)</th>
+        <th>Total V.A.T (16%)</th>
+  
+      </tr>
+    </thead>
+  
+    <tbody>
+  
+            {% for product in product %}
+        <tr>
+          <td class="table-info">{{product.id}}</td>
+          <!-- <td class="table-success">{{product.category}}</td>  -->
+          <td class="table-info">{{product.name}}</td> 
+          <td class="table-info">{{product.quantity}}</td>
+          <td class="table-info">{{product.buying_price|floatformat:2}}ksh</td> 
+          <td class="table-info">{{product.total_price_per_inventory|floatformat:2}}ksh</td> 
+          <td class="table-info">{{product.VAT|floatformat:2}}ksh</td>         
+           <td class="table-info">{{product.total_vat_per_inventory|floatformat:2}}ksh</td>
+
+
+          <!-- <td class="table-danger"><a class="btn btn-danger" href="{% url 'edit_product' product.id %}" role="button"><span data-feather="edit"></span></a></td> -->
+  
+        </tr>
+  
+          {% endfor %}
+  </ul>
+    </tbody>
+  
+  </table>
+  </div>
+
+
+ {% endblock content %}

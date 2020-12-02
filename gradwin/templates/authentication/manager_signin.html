@@ -2,7 +2,7 @@
 <title>Manager</title>
 <div class="container">
   <form class="form-signin" method="post" action="manager_signin">
-    {% csrf_token %}
+    {% include 'partials/_alert.html' %} {% csrf_token %} {% csrf_token %}
     <img class="mb-4" src="media/login.png" alt="" width="72" height="72" />
     <h1 class="h3 mb-3 font-weight-normal">Gradwin Manager</h1>
     <label for="inputusername" class="sr-only">Username</label>
@@ -35,20 +35,4 @@
   </form>
 </div>
 
-<div>
-  {% for message in messages%}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-      <script>
-        $(".alert").alert();
-
-        $().alert("dispose");
-      </script>
-    </button>
-  </div>
-
-  {% endfor %}
-</div>
 {% endblock content %}

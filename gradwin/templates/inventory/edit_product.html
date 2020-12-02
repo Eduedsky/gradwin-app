@@ -1,0 +1,148 @@
+{% extends "base.html" %} {% block content %} 
+
+{% load static %}
+<nav
+  id="sidebarMenu"
+  class="col-md-3 col-lg-2 d-md-block bg-light pl-2 sidebar collapse"
+>
+<div class="sidebar-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="">
+          <span data-feather="edit"></span>
+          Edit Product Price
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_category' %}">
+          <span data-feather="archive"></span>
+          Add Category
+        </a>
+      </li>
+    </ul>
+
+    <div class="pl-5" style="align-items: bottom">
+      <a href="{% url 'view_inventory' %} " class="btn btn-info">Back</a>
+    </div>
+  </div>
+</nav>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Name: {{values.name}}</a></li>
+      <li class="breadcrumb-item"><a href="#">Category: {{values.category}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Buying Price: {{values.buying_price}}KSH</li>
+    </ol>
+  </nav>
+</div>
+
+
+<form class="form-signin" action="{% url 'edit_product' product.id %}" method="post">
+  {% csrf_token %}
+  {% include 'partials/_alert.html' %}
+  <div class="row">
+    <div class="form-group col-md-4">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="name" class="sr-only">Inventory name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        placeholder="Inventory Name"
+        required
+        value="{{values.name}}"
+
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="category" class="sr-only">Book Category</label>
+      <select 
+        class="form-control" 
+        id="category"
+        value="{{product.category}}"
+        name="category"
+        class="form-control"
+        placeholder="Product Category"
+
+      >
+        {% for category in category %}
+          <option>{{category.name}}</option>
+
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="buying_price" class="sr-only">Price</label>
+      <input
+        type="number"
+        id="buying_price"
+        name="buying_price"
+        class="form-control"
+        placeholder="Buying Price"
+        min="1" 
+        max="40000"
+        step="any"
+        required
+        autofocus
+        value="{{values.buying_price}}"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="author" class="sr-only">Author</label>
+      <input
+        type="text"
+        id="author"
+        class="form-control"
+        placeholder="Author / Publisher"
+        name="author"
+        required
+        autofocus
+        value="{{values.author}}"
+      />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="quantity" class="sr-only">Quantity</label>
+      <input
+        type="number"
+        id="quantity"
+        class="form-control"
+        placeholder="Quantity"
+        name="quantity"
+        min="1" 
+        max="500"
+        required
+        autofocus
+        value="{{values.quantity}}"
+      />
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary btn-block" type="submit">
+      Edit Inventory
+    </button>
+  </div>
+  <div class="col-md-3">
+    
+  </div>
+  <div class="col-md-2">
+    <a href="{% url 'delete_inventory' product.id %}" class="btn btn-danger btn-block" role="button">Delete</a>
+  </div>
+
+</div>
+
+  <p class="mt-5 mb-3 text-muted">&copy; Gradwin Bookshop</p>
+</form>
+{% endblock content %}

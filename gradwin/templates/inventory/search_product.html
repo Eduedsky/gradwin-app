@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- {% include 'partials/_alert.html' %} -->
+ 
+<h1 class="h2">Search for product</h1>
+<div class="btn-toolbar mb-2 mb-md-0">
+  
+</div>
+</div>
+
+<form class="form-signin" action="search_product" method="post">
+    {% csrf_token %}
+      {% include 'partials/_alert.html' %}
+    <div class="form-group">
+      <input
+      class="form-control form-control"
+      aria-label="Search"
+      type="text"
+      id="search_field"
+      class="form-control"
+      placeholder="Search Product"
+      name="search_field"
+      value="{{values.search_field}}"
+      autofocus
+    />     
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+<h2>Product Details</h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-sm table-striped table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Product_No</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Date Entry</th>
+      <th>Buying Price</th>
+      <th>Quantity</th>     
+       <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+          {% for product in product %}
+    
+      <tr class="table-info">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.author}}</td>
+        <td>{{product.date_entry}}</td>
+        <td>{{product.buying_price|floatformat:2}}ksh</td>   
+        <td>{{product.quantity}}</td>
+        <td class="table-danger"><a class="btn btn-danger" href="{% url 'edit_product' product.id %}" role="button"><span data-feather="edit"></span></a></td>
+
+      </tr>
+
+        {% endfor %}
+
+
+
+</ul>
+  </tbody>
+
+</table>
+</div>
+{% endblock content %}
